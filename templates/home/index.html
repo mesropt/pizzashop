@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class='card'>
+        <div class='card-header'>
+            <h1>Pizza Shop market</h1>
+        </div>
+        <div class='card-body'>
+            <p>We are happy that you are with us, we are offering blya blya blya</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card-group">
+            {% for pizza in pizza_list %}
+                <div class="card" style="width:400px">
+                    <img src="{{ pizza.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ pizza.name }}</h5>
+                        <p class="card-text">{{ pizza.description }}
+                            </p>
+
+                            <button type="button" class="btn btn-primary">Detail page</button>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
