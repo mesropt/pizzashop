@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<form >
+    <input type="search" name="q" id="">
+    <button type="submit">SEARCH</button>
+</form>
     <div class='card'>
         <div class='card-header'>
             <h1>Pizza Shop market</h1>
@@ -16,15 +20,41 @@
                     <img src="{{ pizza.image.url }}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ pizza.name }}</h5>
-                        <p class="card-text">{{ pizza.description }}
-                            </p>
-
-                            <button type="button" class="btn btn-primary">Detail page</button>
+                        <p class="card-text">{{ pizza.description }}</p>
+                        <a href="{% url 'pizza:detail' pizza.pk %}"><button type="button" class="btn btn-primary">Detail page</button></a>
                     </div>
                 </div>
 
             {% endfor %}
         </div>
     </div>
+
+    <style>
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+    </style>
+
+
+        {% include 'layouts/pagination.html' with page_obj=pizza_list %}
 
 {% endblock %}

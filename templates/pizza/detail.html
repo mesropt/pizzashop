@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        {{ pizza.name }}<br>
+<!--        {{ pizza.image }}-->
+        <img src="{{ pizza.image.url }}" class="card-img-top" alt="..."><br>
+        {{ pizza.description }}<br>
+        {% for pizza in pizza.all %}
+            {{ pizza.name }}
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-warning"><a href="{% url 'pizza:update' pizza.pk %}">UPDATE</a></button>
+        <br>
+        <button type="submit" class="btn btn-danger"><a href="{% url 'pizza:delete' pizza.pk %}">DELETE</a></button>
+        <br>
+    </div>
+{% endblock %}

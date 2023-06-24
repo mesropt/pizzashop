@@ -1,8 +1,16 @@
 from django.shortcuts import render
 from pizza.models import Pizza
-# Create your views here.
+from django.core.paginator import Paginator
 
 
 def home(request):
-    pizza_list = Pizza.objects.all()
-    return render(request, 'home/index.html', {'pizza_list': pizza_list})
+    query = request.GET.get('q')
+    if query:
+        pizza_list = Pizza.objects.filter(name__icontains=query)
+    else:
+        pizza_list = Pizza.objects.all()
+    pizza_list = pizza_list.order_by('-pk')
+    paginator = Paginator(pizza_list, 2)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, "home/index.html", {"pizza_list": page_obj})
